@@ -1,27 +1,28 @@
 import sounddevice as sd
 import numpy as np
 from piper import PiperVoice
+import os
 
-# Load Piper voice
-voice = PiperVoice.load(
-    r"C:\Users\anshu\Desktop\Mini Project\Helmet_Env\Github\models\en_US-amy-medium.onnx"
-)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(BASE_DIR)
+model = os.path.join(REPO_ROOT, "models", "en_US-amy-medium.onnx")
 
+voice = PiperVoice.load(model)
 SAMPLE_RATE = voice.config.sample_rate
 
 def speak(text):
     """Generate speech and play it directly."""
 
-    # Collect PCM16 chunks
+    #collect PCM16 chunks
     audio_chunks = [chunk.audio_int16_bytes for chunk in voice.synthesize(text)]
 
-    # Join into one byte stream
+    #join into one byte stream
     audio_bytes = b"".join(audio_chunks)
 
-    # Convert bytes -> numpy array
+    #convert bytes -> numpy array
     audio_np = np.frombuffer(audio_bytes, dtype=np.int16)
 
-    # Play back
+    #play back
     sd.play(audio_np, samplerate=SAMPLE_RATE)
     sd.wait()
 
