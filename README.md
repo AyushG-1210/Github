@@ -1,4 +1,4 @@
-Download -> llama-2-7b-chat.Q4_K_M.gguf from HuggingFace and add to model/... for it to function correctly. 
+Download -> [llama-2-7b-chat.Q4_K_M.gguf](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf?download=true), or download from HuggingFace (same model). 
 
 Change paths to match your local system if the functioning isnt proper. 
 
